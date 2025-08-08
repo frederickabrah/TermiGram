@@ -1,0 +1,80 @@
+/* TermiGram CSS */
+
+Screen {
+    background: $surface;
+    color: $text;
+}
+
+Header {
+    background: $primary;
+    color: $text;
+}
+
+Footer {
+    background: $primary-darken-2;
+    color: $text;
+}
+
+/* Login Screen Styling */
+LoginScreen {
+    align: center middle;
+}
+
+#login_grid {
+    grid-size: 1;
+    grid-gutter: 1;
+    width: 60;
+    height: auto;
+    padding: 1 2;
+    background: $surface-darken-2;
+    border: thick $primary-darken-1;
+}
+
+#login_prompt {
+    width: 100%;
+    content-align: center middle;
+}
+
+#login_input {
+    width: 100%;
+}
+
+#login_submit_button {
+    width: 100%;
+}
+
+/* Main App Layout */
+#main_app_container {
+    layout: horizontal;
+    height: 100%;
+}
+
+ChatList {
+    width: 30%;
+    height: 100%;
+    border-right: solid $primary;
+}
+
+MessageView {
+    width: 70%;
+    height: 100%;
+}
+
+#right_panel {
+    layout: vertical;
+    width: 70%;
+    height: 100%;
+}
+
+#message_input {
+    height: 3;
+    border-top: solid $primary;
+}
+
+#status_bar {
+    height: 1;
+    dock: bottom;
+    background: $surface-darken-1;
+    color: $text;
+    padding: 0 1;
+}
