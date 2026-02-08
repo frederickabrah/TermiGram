@@ -1,4 +1,4 @@
-/* TermiGram CSS */
+/* TermiGram CSS - Dark Theme */
 
 Screen {
     background: $surface;
@@ -62,6 +62,7 @@ ProfileScreen {
     width: 100%;
 }
 
+/* Main App Layout */
 #main_app_container {
     layout: horizontal;
     height: 100%;

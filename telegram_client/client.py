@@ -1,6 +1,8 @@
 import asyncio
+import os
 from telethon import TelegramClient, events
 from telethon.tl.types import User
+from telethon.tl.functions.channels import CreateChannelRequest
 
 class TelegramManager:
     """Manages all interactions with the Telegram API via Telethon."""
@@ -47,9 +49,41 @@ class TelegramManager:
             messages.append(message)
         return messages
 
-    async def send_message(self, chat_entity, message_text: str):
+    async def send_message(self, chat_entity, message_text: str, reply_to_msg_id: int = None):
         """Send a message to a given chat entity."""
-        await self.client.send_message(chat_entity, message_text)
+        await self.client.send_message(chat_entity, message_text, reply_to=reply_to_msg_id)
+
+    async def edit_message(self, chat_entity, message_id: int, new_text: str):
+        """Edit an existing message."""
+        await self.client.edit_message(chat_entity, message_id, new_text)
+
+    async def delete_message(self, chat_entity, message_ids: list[int]):
+        """Delete messages."""
+        await self.client.delete_messages(chat_entity, message_ids)
+
+    async def search_messages(self, query: str, limit: int = 50):
+        """Search messages globally."""
+        messages = []
+        async for message in self.client.iter_messages(None, search=query, limit=limit):
+            messages.append(message)
+        return messages
+
+    async def create_group(self, title: str, users: list):
+        """Create a new group with specified users."""
+        return await self.client.iter_create_group(title, users=users)
+
+    async def create_channel(self, title: str, about: str = None):
+        """Create a new channel."""
+        return await self.client(CreateChannelRequest(title=title, about=about))
+
+    async def download_media(self, message, path: str = "downloads/"):
+        """Download media from a message to a specified path."""
+        if message.media:
+            # Ensure the directory exists
+            os.makedirs(path, exist_ok=True)
+            file_path = await message.download_media(file=path)
+            return file_path
+        return None
 
     def set_message_handler(self, callback):
         """Set a callback function to handle incoming messages."""
@@ -58,3 +92,19 @@ class TelegramManager:
         async def handler(event):
             if self.message_handler_callback:
                 await self.message_handler_callback(event.message)
+
+    async def get_entity(self, entity):
+        """Get the full entity (user, chat, or channel)."""
+        return await self.client.get_entity(entity)
+
+    async def get_full_user(self, user_entity):
+        """Get the full user object, including bio."""
+        return await self.client.get_full_user(user_entity)
+
+    async def send_poll_vote(self, message, options: list[int]):
+        """Send a vote to a poll."""
+        await message.click(options=options)
+
+    async def send_reaction(self, message, reaction: str):
+        """Send a reaction to a message."""
+        await message.react(reaction)

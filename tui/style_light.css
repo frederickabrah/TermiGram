@@ -1,18 +1,18 @@
-/* TermiGram CSS */
+/* TermiGram CSS - Light Theme */
 
 Screen {
-    background: $surface;
-    color: $text;
+    background: #F0F0F0;
+    color: #333333;
 }
 
 Header {
-    background: $primary;
-    color: $text;
+    background: #6200EE;
+    color: #FFFFFF;
 }
 
 Footer {
-    background: $primary-darken-2;
-    color: $text;
+    background: #3700B3;
+    color: #FFFFFF;
 }
 
 /* Login Screen Styling */
@@ -26,8 +26,8 @@ LoginScreen {
     width: 60;
     height: auto;
     padding: 1 2;
-    background: $surface-darken-2;
-    border: thick $primary-darken-1;
+    background: #FFFFFF;
+    border: thick #BB86FC;
 }
 
 #login_prompt {
@@ -54,14 +54,15 @@ ProfileScreen {
     width: 60;
     height: auto;
     padding: 1 2;
-    background: $surface-darken-2;
-    border: thick $primary-darken-1;
+    background: #FFFFFF;
+    border: thick #BB86FC;
 }
 
 #close_button {
     width: 100%;
 }
 
+/* Main App Layout */
 #main_app_container {
     layout: horizontal;
     height: 100%;
@@ -70,7 +71,7 @@ ProfileScreen {
 ChatList {
     width: 30%;
     height: 100%;
-    border-right: solid $primary;
+    border-right: solid #BB86FC;
 }
 
 MessageView {
@@ -86,13 +87,13 @@ MessageView {
 
 #message_input {
     height: 3;
-    border-top: solid $primary;
+    border-top: solid #BB86FC;
 }
 
 #status_bar {
     height: 1;
     dock: bottom;
-    background: $surface-darken-1;
-    color: $text;
+    background: #E0E0E0;
+    color: #333333;
     padding: 0 1;
 }

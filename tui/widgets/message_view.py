@@ -1,13 +1,18 @@
 from textual.app import ComposeResult
-from textual.widgets import RichLog, Static
+from textual.widgets import DataTable, Static
 
 class MessageView(Static):
     """A widget to display messages from a selected chat."""
 
     def compose(self) -> ComposeResult:
-        yield RichLog(id="message_log", wrap=True, highlight=True, markup=True)
+        yield DataTable(id="message_table")
 
     def on_mount(self) -> None:
-        """Clear the log and display a welcome message."""
-        log = self.query_one(RichLog)
-        log.write("Select a chat to view messages.")
+        """Set up the table columns when the widget is mounted."""
+        table = self.query_one(DataTable)
+        table.add_column("Time", width=8)
+        table.add_column("Sender", width=15)
+        table.add_column("Message")
+        table.cursor_type = "row"
+        table.zebra_stripes = True
+        table.add_row("", "", "Select a chat to view messages.")

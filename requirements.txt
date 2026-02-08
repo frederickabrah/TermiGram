@@ -1,3 +1,4 @@
 textual
 telethon
 python-dotenv
+timg
